@@ -12,6 +12,9 @@ export class GamesComponent implements OnInit {
 
   games : Games[]=[];
   ResultGames : Games[]=[];
+
+  categories: string[] = [];
+ 
   constructor(private gamesservice: GamesService) { }
 
   ngOnInit(): void {
@@ -22,6 +25,9 @@ export class GamesComponent implements OnInit {
   .subscribe(games=>{
     this.ResultGames=this.games=games;
   });  
+}
+UpdateCatigories(category: string){
+  this.categories[0]=category;
 }
 
 }
