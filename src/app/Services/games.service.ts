@@ -17,9 +17,9 @@ export class GamesService {
   findAll(){
    return this.http.get<Games[]>(this.APIUrl);
   }
-  findByCategories(categories: string){
+  findByCategories(){
     
-    return this.http.get<Games[]>(this.APIUrl+"?categories="+categories);
+    return this.http.get<Games[]>(this.APIUrl);
   }
   updateCategorie(categorie : string){
     this.selectedCatigorie=categorie;

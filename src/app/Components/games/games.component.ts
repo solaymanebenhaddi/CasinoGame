@@ -24,7 +24,7 @@ export class GamesComponent implements OnInit{
     this.categories=this.gamesservice.selectedCatigorie;
     
    
-      this.GetvalueByCategory("new")
+      this.GetvalueByCategory(this.categories)
     
     
     console.log("games "+this.categories);
@@ -39,9 +39,9 @@ UpdateCatigories(category: string){
 }
 GetvalueByCategory(category: string){
   console.log("function  "+category);
-  this.gamesservice.findByCategories(category)
+  this.gamesservice.findByCategories()
   .subscribe(games=>{
-    this.ResultGames=this.games=games;
+    this.ResultGames=this.games=games.filter(game=>game.categories.includes(category));
   });
   
 }
