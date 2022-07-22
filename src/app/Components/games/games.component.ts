@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Input, OnChanges, ChangeDetectorRef} from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { catValue } from 'src/app/Globals';
 import { Games } from 'src/app/Models/Games';
 import { GamesService } from 'src/app/Services/games.service';
 
@@ -7,27 +9,40 @@ import { GamesService } from 'src/app/Services/games.service';
   templateUrl: './games.component.html',
   styleUrls: ['./games.component.css']
 })
-export class GamesComponent implements OnInit {
+export class GamesComponent implements OnInit{
 
-
+  @Input() selectedCatigorie : string='';
   games : Games[]=[];
   ResultGames : Games[]=[];
-
-  categories: string[] = [];
+  
+  categories: string ='';
  
-  constructor(private gamesservice: GamesService) { }
-
+  constructor(private gamesservice: GamesService,private route : ActivatedRoute,private change : ChangeDetectorRef) { }
+  
   ngOnInit(): void {
-    this.getGames();
+
+    this.categories=this.gamesservice.selectedCatigorie;
+    
+   
+      this.GetvalueByCategory("new")
+    
+    
+    console.log("games "+this.categories);
+      
   }
-  getGames(){
-    this.gamesservice.findAll()
+
+  
+
+UpdateCatigories(category: string){
+  this.categories=category;
+  this.ngOnInit();
+}
+GetvalueByCategory(category: string){
+  console.log("function  "+category);
+  this.gamesservice.findByCategories(category)
   .subscribe(games=>{
     this.ResultGames=this.games=games;
-  });  
+  });
+  
 }
-UpdateCatigories(category: string){
-  this.categories[0]=category;
-}
-
 }

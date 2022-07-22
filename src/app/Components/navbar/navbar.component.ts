@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output }from '@angular/core';
 import { catValue } from 'src/app/Globals';
+import { GamesService } from 'src/app/Services/games.service';
+import { GamesComponent } from '../games/games.component';
+
 
 @Component({
   selector: 'app-navbar',
@@ -8,13 +11,19 @@ import { catValue } from 'src/app/Globals';
 })
 export class NavbarComponent implements OnInit {
 
-  Catvalue = catValue ;
 
-  constructor() { }
+  @Input() Categorievalue : string='';
+  constructor(private gamesServ : GamesService,private game : GamesComponent) { }
 
   ngOnInit(): void {
+  
+    
   }
-  changeCat(category: string){
-    this.Catvalue = category;
+  ChangeCategorie(cat:string){
+    this.gamesServ.updateCategorie(cat);
+    console.log("test "+cat);
+    this.game.ngOnInit();
   }
+
+  
 }

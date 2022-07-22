@@ -1,6 +1,6 @@
-<div class="row">
-    <div class="col-md-3 my-3" *ngFor="let game of ResultGames">
-        <div class="card border-0 position-relative" style="width: 18rem;">
+<div class="row d-flex mt-5">
+    <div  class="col-md-3 my-2" *ngFor="let game of ResultGames">
+        <div class="card border-0 position-relative">
             <img src="assets/new.png"class="new" *ngIf="game.categories.includes('new')"
             alt="" srcset=""/>
             <img class="card-img-top img" src={{game.image}} alt="Card image cap">
