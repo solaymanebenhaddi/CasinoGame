@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { GamesComponent } from './Components/games/games.component';
 import { HttpClientModule } from '@angular/common/http';
+import { GamesService } from './Services/games.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     
   ],
-  providers: [GamesComponent],
+  providers: [GamesComponent,GamesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

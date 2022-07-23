@@ -19,9 +19,11 @@ export class NavbarComponent implements OnInit {
   
     
   }
-  ChangeCategorie(cat:string){
+  ChangeCategorie(cat:any){
+    
     this.gamesServ.updateCategorie(cat);
     console.log("test "+cat);
+    
     this.game.ngOnInit();
   }
 

@@ -11,7 +11,7 @@ import { GamesService } from 'src/app/Services/games.service';
 })
 export class GamesComponent implements OnInit{
 
-  @Input() selectedCatigorie : string='';
+  @Input() selectedCatigorie ='';
   games : Games[]=[];
   ResultGames : Games[]=[];
   
@@ -21,13 +21,13 @@ export class GamesComponent implements OnInit{
   
   ngOnInit(): void {
 
-    this.categories=this.gamesservice.selectedCatigorie;
+    
     
    
-      this.GetvalueByCategory(this.categories)
+     (this.gamesservice.selectedCatigorie?this.GetvalueByCategory(this.gamesservice.selectedCatigorie):null) 
     
-    
-    console.log("games "+this.categories);
+     this.change.detectChanges();
+    console.log("value of categorie : "+this.gamesservice.selectedCatigorie);
       
   }
 
@@ -37,12 +37,21 @@ UpdateCatigories(category: string){
   this.categories=category;
   this.ngOnInit();
 }
-GetvalueByCategory(category: string){
-  console.log("function  "+category);
+
+customTB(item :any, index:any) {
+  return `${item.id}-${index}`;
+}
+GetvalueByCategory(cat :string){
+ 
+
   this.gamesservice.findByCategories()
   .subscribe(games=>{
-    this.ResultGames=this.games=games.filter(game=>game.categories.includes(category));
+    this.ResultGames.slice(0);
+    this.ResultGames=this.games=games.filter((game)=>(game.categories.includes(cat)));
+    this.games.slice(0);
+    this.change.detectChanges();
   });
-  
+  console.log("categorie in function : "+cat);
+  console.log("games "+JSON.stringify(this.ResultGames));
 }
 }

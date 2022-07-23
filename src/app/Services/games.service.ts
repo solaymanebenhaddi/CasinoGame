@@ -9,7 +9,7 @@ import { Games } from '../Models/Games';
 })
 export class GamesService {
 
-  selectedCatigorie: any;
+  selectedCatigorie: any='new';
   APIUrl = "http://localhost:3000/games";
 
   constructor(private http:HttpClient) { }
@@ -21,7 +21,7 @@ export class GamesService {
     
     return this.http.get<Games[]>(this.APIUrl);
   }
-  updateCategorie(categorie : string){
+  updateCategorie(categorie : any){
     this.selectedCatigorie=categorie;
   }
 }
